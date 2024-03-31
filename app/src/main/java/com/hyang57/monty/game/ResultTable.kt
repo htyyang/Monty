@@ -11,12 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.csc.urquiz.R
-import com.csc.urquiz.game.Quiz
-import com.csc.urquiz.ui.theme.URQuizTheme
 import com.hyang57.monty.R
 
 @Composable
@@ -45,20 +41,20 @@ fun ResultRow(
 
 @Composable
 fun ResultTable(
-    answers: List<Boolean>,
+    winResult: Int,
+    roundNum: Int,
 ) {
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)
     ) {
-        val correctAnswers = answers.filter { it }.size
         ResultRow(
-            description = stringResource(id = R.string.num_answers_correct),
-            value = correctAnswers.toString()
+            description = stringResource(id = R.string.win_result),
+            value = winResult.toString()
         )
         ResultRow(
-            description = stringResource(id = R.string.num_answers_wrong),
-            value = (Quiz.Companion.NUM_QUESTIONS - correctAnswers).toString()
+            description = stringResource(id = R.string.round_num),
+            value = roundNum.toString()
         )
     }
 }

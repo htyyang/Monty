@@ -6,4 +6,9 @@
     <string name="stats">Statistics</string>
     <string name="play">Play!</string>
     <string name="game_results">Your game results</string>
+    <string name="win_result">Win</string>
+    <string name="new_game">New game</string>
+    <string name="round_num">Round</string>
+    <string name="hint">Hint</string>
+    <string name="clear">Clear</string>
 </resources>

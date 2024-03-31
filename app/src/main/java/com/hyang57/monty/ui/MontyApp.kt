@@ -2,8 +2,6 @@ package com.hyang57.monty.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.foundation.layout.fillMaxSize
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -17,6 +15,8 @@ import com.hyang57.monty.ui.screens.SettingDestination
 import com.hyang57.monty.ui.screens.StatsDestination
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hyang57.monty.ui.screens.GameScreen
+import com.hyang57.monty.ui.screens.SettingScreen
+import com.hyang57.monty.ui.screens.StatsScreen
 
 interface NavDestination {
     val route: String
@@ -54,26 +54,71 @@ fun MontyNavHost(
             composable(
                 route = GameDestination.route
             ) {
-                //viewModel.newRound()
-                //Log.i("check","newround")
                 GameScreen(
                     gameState = gameState,
                     onSelect = {
                         viewModel.selectCard(selection = it.id)
-                        Log.i("viewModel.selectCard: ","${it.id}")
-                        Log.i("onSelect: ","${it.isFlipped}")
-                            },
+                        Log.i("viewModel.selectCard: ", "${it.id}")
+                        Log.i("onSelect: ", "${it.isFlipped}")
+                    },
+                    onHome = {
+                        navController.navigate(HomeDestination.route)
+                        if(!gameState.roundEnd){
+                            viewModel.roundNotFinished()
+                        }
+                    },
+                    onStats = {
+                        if(!gameState.roundEnd){
+                        viewModel.roundNotFinished()
+                    }
+                        navController.navigate(StatsDestination.route)
+                    },
+                    onNewGame = {
+                        if(!gameState.roundEnd) {
+                            viewModel.roundNotFinished()
+                        }
+                        viewModel.newRound()
+                        navController.navigate(GameDestination.route)
+                    },
+
+                    onHint = {
+                        if(gameState.enableHint){
+                            viewModel.hintCard()
+                        }
+                    },
+
+                )
+            }
+        composable(
+            route = StatsDestination.route
+                ) {
+            StatsScreen(
+                    gameState = gameState,
                     onHome = {
                         navController.navigate(HomeDestination.route)
                     },
-                    onStats = {
-                        navController.navigate(StatsDestination.route)
-                    }
-                        )
-                    }
-
-
-            }
+                    onClear = {
+                        viewModel.clearStats()
+                    },
+                    )
+                }
+        composable(
+            route = SettingDestination.route
+        ) {
+            SettingScreen(
+                gameState = gameState,
+                onHome = {
+                    navController.navigate(HomeDestination.route)
+                },
+                changeAmount = {
+                    viewModel.changeAmount(newAmount = it)
+                },
+                enableHint = {
+                    viewModel.enableHint(enable = it)
+                }
+            )
+        }
+        }
 
     }
 

@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,18 +64,22 @@ fun HomeScreen(
             )
         }
         Row(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f),
+
         ) {
             Button(
                 onClick = navToGameScreen
             ) {
                 Text(stringResource(id = R.string.play))
             }
+            Spacer(modifier = Modifier.width(8.dp))
             Button(
                 onClick = navToSettingScreen
             ) {
                 Text(stringResource(id = R.string.setting))
             }
+            Spacer(modifier = Modifier.width(8.dp))
             Button(
                 onClick = navToStatsScreen
             ) {

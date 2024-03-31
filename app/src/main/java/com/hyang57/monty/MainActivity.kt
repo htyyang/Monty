@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.hyang57.monty.ui.GameState
 import com.hyang57.monty.ui.MontyApp
 import com.hyang57.monty.ui.MontyViewModel
 import com.hyang57.monty.ui.theme.MontyTheme
@@ -29,7 +28,7 @@ class MainActivity : ComponentActivity() {
             val gameState by viewModel.gameState.collectAsState()
 
             MontyTheme {
-                // A surface container using the 'background' color from the theme
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
